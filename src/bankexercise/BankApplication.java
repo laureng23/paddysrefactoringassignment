@@ -19,7 +19,6 @@ public class BankApplication extends JFrame {
 	
 	JMenuBar menuBar;
 	JMenu navigateMenu, recordsMenu, transactionsMenu, fileMenu, exitMenu;
-	JMenuItem createItem, modifyItem, deleteItem, setOverdraft, setInterest;
 	JMenuItem deposit, withdraw, calcInterest;
 	JMenuItem open, save, saveAs;
 	JMenuItem closeApp;
@@ -40,6 +39,8 @@ public class BankApplication extends JFrame {
 	Map<String, JTextField> fields = new HashMap<String, JTextField>();
 	
 	Map<String, JMenuItem> navMenuItems = new HashMap<String, JMenuItem>();
+	
+	Map<String, JMenuItem> recordMenuItems = new HashMap<String, JMenuItem>();
 	
 	public BankApplication() {
 		
@@ -88,21 +89,13 @@ public class BankApplication extends JFrame {
 				Arrays.asList("Next Item", "Previous Item", "First Item", "Last Item", "Find By Account Number", "Find By Surname", "List All Records" ));
 		setMenuItems(navMenuItems, navigateMenu, menuItems);
     	
-    	menuBar.add(navigateMenu);
+		menuBar.add(navigateMenu);
     	
-    	recordsMenu = new JMenu("Records");
+		recordsMenu = new JMenu("Records");
     	
-    	createItem = new JMenuItem("Create Item");
-    	modifyItem = new JMenuItem("Modify Item");
-    	deleteItem = new JMenuItem("Delete Item");
-    	setOverdraft = new JMenuItem("Set Overdraft");
-    	setInterest = new JMenuItem("Set Interest");
-    	
-    	recordsMenu.add(createItem);
-    	recordsMenu.add(modifyItem);
-    	recordsMenu.add(deleteItem);
-    	recordsMenu.add(setOverdraft);
-    	recordsMenu.add(setInterest);
+    		ArrayList<String> recordMenuLabels = new ArrayList<String>(
+    				Arrays.asList("Create Item", "Modify Item", "Delete Item", "Set Overdraft", "Set Interest"));
+    		setMenuItems(recordMenuItems, navigateMenu, recordMenuLabels);
     	
     	menuBar.add(recordsMenu);
     	
@@ -140,7 +133,7 @@ public class BankApplication extends JFrame {
     	
     	setDefaultCloseOperation(EXIT_ON_CLOSE);
 	
-		setOverdraft.addActionListener(new ActionListener(){
+		recordMenuItems.get("Set Overdraft").addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				if(table.get(currentItem).getAccountType().trim().equals("Current")){
 					String newOverdraftStr = JOptionPane.showInputDialog(null, "Enter new Overdraft", JOptionPane.OK_CANCEL_OPTION);
@@ -263,7 +256,7 @@ public class BankApplication extends JFrame {
 		lastItemButton.addActionListener(last);
 		navMenuItems.get("First Item").addActionListener(last);
 		
-		deleteItem.addActionListener(new ActionListener(){
+		recordMenuItems.get("Delete Item").addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 						
 							table.remove(currentItem);
@@ -279,14 +272,14 @@ public class BankApplication extends JFrame {
 			}
 		});
 		
-		createItem.addActionListener(new ActionListener(){
+		recordMenuItems.get("Create Item").addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				new CreateBankDialog(table);		
 			}
 		});
 		
 		
-		modifyItem.addActionListener(new ActionListener(){
+		recordMenuItems.get("Modify Item").addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				//new way of editing surname and firstname
 				fields.get("Surname").setEditable(true);
@@ -295,7 +288,7 @@ public class BankApplication extends JFrame {
 			}
 		});
 		
-		setInterest.addActionListener(new ActionListener(){
+		recordMenuItems.get("Set Interest").addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				
 				 String interestRateStr = JOptionPane.showInputDialog("Enter Interest Rate: (do not type the % sign)");
@@ -526,7 +519,7 @@ public class BankApplication extends JFrame {
 	
 	}
 	
-	public void setMenuItems(Map<String, JMenuItem> menuList, JMenu menu, ArrayList<String> menuItems) {
+	private void setMenuItems(Map<String, JMenuItem> menuList, JMenu menu, ArrayList<String> menuItems) {
 		
 		menuItems.forEach(item ->{
 			menuList.put(item, new JMenuItem(item));
