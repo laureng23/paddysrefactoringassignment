@@ -517,11 +517,11 @@ public class BankApplication extends JFrame {
 	
 	}
 	
-	private void setMenuItems(Map<String, JMenuItem> menuList, JMenu menu, ArrayList<String> menuItems) {
+	private void setMenuItems(Map<String, JMenuItem> items, JMenu menu, ArrayList<String> menuItems) {
 		
 		menuItems.forEach(item ->{
-			menuList.put(item, new JMenuItem(item));
-			menu.add(navMenuItems.get(item));
+			items.put(item, new JMenuItem(item));
+			menu.add(items.get(item));
 		});
 	}
 	
