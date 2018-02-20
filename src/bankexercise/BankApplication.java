@@ -19,7 +19,6 @@ public class BankApplication extends JFrame {
 	
 	JMenuBar menuBar;
 	JMenu navigateMenu, recordsMenu, transactionsMenu, fileMenu, exitMenu;
-	JMenuItem open, save, saveAs;
 	JMenuItem closeApp;
 	JButton firstItemButton, lastItemButton, nextItemButton, prevItemButton;
 	JLabel accountIDLabel, accountNumberLabel, firstNameLabel, surnameLabel, accountTypeLabel, balanceLabel, overdraftLabel;
@@ -42,6 +41,8 @@ public class BankApplication extends JFrame {
 	Map<String, JMenuItem> recordMenuItems = new HashMap<String, JMenuItem>();
 	
 	Map<String, JMenuItem> transactionMenuItems = new HashMap<String, JMenuItem>();
+	
+	Map<String, JMenuItem> fileMenuItems = new HashMap<String, JMenuItem>();
 	
 	public BankApplication() {
 		
@@ -111,14 +112,11 @@ public class BankApplication extends JFrame {
     	
     	fileMenu = new JMenu("File");
     	
-    	open = new JMenuItem("Open File");
-    	save = new JMenuItem("Save File");
-    	saveAs = new JMenuItem("Save As");
+   ArrayList<String> fileMenuLabels = new ArrayList<String>(
+		   Arrays.asList("Open File", "Save File", "Save As"));
+   setMenuItems(fileMenuItems, fileMenu, fileMenuLabels);
     	
-    	fileMenu.add(open);
-    	fileMenu.add(save);
-    	fileMenu.add(saveAs);
-    	
+   
     	menuBar.add(fileMenu);
     	
     	exitMenu = new JMenu("Exit");
@@ -327,7 +325,7 @@ public class BankApplication extends JFrame {
 			}
 		});
 		
-		open.addActionListener(new ActionListener(){
+		fileMenuItems.get("Open File").addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				readFile();
 				currentItem=0;
@@ -338,13 +336,13 @@ public class BankApplication extends JFrame {
 			}
 		});
 		
-		save.addActionListener(new ActionListener(){
+		fileMenuItems.get("Save File").addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				writeFile();
 			}
 		});
 		
-		saveAs.addActionListener(new ActionListener(){
+		fileMenuItems.get("Save As").addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				saveFileAs();
 			}
