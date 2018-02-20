@@ -19,7 +19,6 @@ public class BankApplication extends JFrame {
 	
 	JMenuBar menuBar;
 	JMenu navigateMenu, recordsMenu, transactionsMenu, fileMenu, exitMenu;
-	JMenuItem nextItem, prevItem, firstItem, lastItem, findByAccount, findBySurname, listAll;
 	JMenuItem createItem, modifyItem, deleteItem, setOverdraft, setInterest;
 	JMenuItem deposit, withdraw, calcInterest;
 	JMenuItem open, save, saveAs;
@@ -39,6 +38,8 @@ public class BankApplication extends JFrame {
 	String[] details = {"Account ID", "Account Number", "First Name", "Surname", "Account Type", "Balance", "Overdraft"};
 	Map<String, JLabel> labels = new HashMap<String, JLabel>();
 	Map<String, JTextField> fields = new HashMap<String, JTextField>();
+	
+	Map<String, JMenuItem> navMenuItems = new HashMap<String, JMenuItem>();
 	
 	public BankApplication() {
 		
@@ -79,25 +80,13 @@ public class BankApplication extends JFrame {
 		add(buttonPanel, BorderLayout.SOUTH);
 		
 		menuBar = new JMenuBar();
-    	setJMenuBar(menuBar);
+		setJMenuBar(menuBar);
 		
 		navigateMenu = new JMenu("Navigate");
-    	
-    	nextItem = new JMenuItem("Next Item");
-    	prevItem = new JMenuItem("Previous Item");
-    	firstItem = new JMenuItem("First Item");
-    	lastItem = new JMenuItem("Last Item");
-    	findByAccount = new JMenuItem("Find by Account Number");
-    	findBySurname = new JMenuItem("Find by Surname");
-    	listAll = new JMenuItem("List All Records");
-    	
-    	navigateMenu.add(nextItem);
-    	navigateMenu.add(prevItem);
-    	navigateMenu.add(firstItem);
-    	navigateMenu.add(lastItem);
-    	navigateMenu.add(findByAccount);
-    	navigateMenu.add(findBySurname);
-    	navigateMenu.add(listAll);
+		
+		ArrayList<String> menuItems = new ArrayList<String>(
+				Arrays.asList("Next Item", "Previous Item", "First Item", "Last Item", "Find By Account Number", "Find By Surname", "List All Records" ));
+		setMenuItems(navMenuItems, navigateMenu, menuItems);
     	
     	menuBar.add(navigateMenu);
     	
@@ -263,16 +252,16 @@ public class BankApplication extends JFrame {
 		};
 		
 		nextItemButton.addActionListener(next1);
-		nextItem.addActionListener(next1);
+		navMenuItems.get("Next Item").addActionListener(next1);
 		
 		prevItemButton.addActionListener(prev);
-		prevItem.addActionListener(prev);
+		navMenuItems.get("Previous Item").addActionListener(prev);
 
 		firstItemButton.addActionListener(first);
-		firstItem.addActionListener(first);
+		navMenuItems.get("First Item").addActionListener(first);
 
 		lastItemButton.addActionListener(last);
-		lastItem.addActionListener(last);
+		navMenuItems.get("First Item").addActionListener(last);
 		
 		deleteItem.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
@@ -316,7 +305,7 @@ public class BankApplication extends JFrame {
 			}
 		});
 		
-		listAll.addActionListener(new ActionListener(){
+		navMenuItems.get("List All Records").addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 		
 				JFrame frame = new JFrame("TableDemo");
@@ -388,7 +377,7 @@ public class BankApplication extends JFrame {
 			}
 		});	
 		
-		findBySurname.addActionListener(new ActionListener(){
+		navMenuItems.get("Find By Surname").addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				
 				String sName = JOptionPane.showInputDialog("Search for surname: ");
@@ -415,7 +404,7 @@ public class BankApplication extends JFrame {
 			}
 		});
 		
-		findByAccount.addActionListener(new ActionListener(){
+		navMenuItems.get("Find By Account Number").addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				
 				String accNum = JOptionPane.showInputDialog("Search for account number: ");
@@ -535,6 +524,14 @@ public class BankApplication extends JFrame {
 		else
 			fields.get("Overdraft").setText("Only applies to current accs");
 	
+	}
+	
+	public void setMenuItems(Map<String, JMenuItem> menuList, JMenu menu, ArrayList<String> menuItems) {
+		
+		menuItems.forEach(item ->{
+			menuList.put(item, new JMenuItem(item));
+			menu.add(navMenuItems.get(item));
+		});
 	}
 	
 	private static RandomAccessFile input;
