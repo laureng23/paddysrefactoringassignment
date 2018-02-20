@@ -36,6 +36,10 @@ public class BankApplication extends JFrame {
 	
 	boolean openValues;
 	
+	String[] details = {"Account ID", "Account Number", "First Name", "Surname", "Account Type", "Balance", "Overdraft"};
+	Map<String, JLabel> labels = new HashMap<String, JLabel>();
+	Map<String, JTextField> fields = new HashMap<String, JTextField>();
+	
 	public BankApplication() {
 		
 		super("Bank Application");
@@ -47,55 +51,16 @@ public class BankApplication extends JFrame {
 	public void initComponents() {
 		setLayout(new BorderLayout());
 		JPanel displayPanel = new JPanel(new MigLayout());
-		
-		accountIDLabel = new JLabel("Account ID: ");
-		accountIDTextField = new JTextField(15);
-		accountIDTextField.setEditable(false);
-		
-		displayPanel.add(accountIDLabel, "growx, pushx");
-		displayPanel.add(accountIDTextField, "growx, pushx, wrap");
-		
-		accountNumberLabel = new JLabel("Account Number: ");
-		accountNumberTextField = new JTextField(15);
-		accountNumberTextField.setEditable(false);
-		
-		displayPanel.add(accountNumberLabel, "growx, pushx");
-		displayPanel.add(accountNumberTextField, "growx, pushx, wrap");
 
-		surnameLabel = new JLabel("Last Name: ");
-		surnameTextField = new JTextField(15);
-		surnameTextField.setEditable(false);
-		
-		displayPanel.add(surnameLabel, "growx, pushx");
-		displayPanel.add(surnameTextField, "growx, pushx, wrap");
-
-		firstNameLabel = new JLabel("First Name: ");
-		firstNameTextField = new JTextField(15);
-		firstNameTextField.setEditable(false);
-		
-		displayPanel.add(firstNameLabel, "growx, pushx");
-		displayPanel.add(firstNameTextField, "growx, pushx, wrap");
-
-		accountTypeLabel = new JLabel("Account Type: ");
-		accountTypeTextField = new JTextField(5);
-		accountTypeTextField.setEditable(false);
-		
-		displayPanel.add(accountTypeLabel, "growx, pushx");
-		displayPanel.add(accountTypeTextField, "growx, pushx, wrap");
-
-		balanceLabel = new JLabel("Balance: ");
-		balanceTextField = new JTextField(10);
-		balanceTextField.setEditable(false);
-		
-		displayPanel.add(balanceLabel, "growx, pushx");
-		displayPanel.add(balanceTextField, "growx, pushx, wrap");
-		
-		overdraftLabel = new JLabel("Overdraft: ");
-		overdraftTextField = new JTextField(10);
-		overdraftTextField.setEditable(false);
-		
-		displayPanel.add(overdraftLabel, "growx, pushx");
-		displayPanel.add(overdraftTextField, "growx, pushx, wrap");
+		//for loop for JLabel & JTextFields
+		for(String string: details) {
+			labels.put(string, new JLabel(string + ": "));
+			fields.put(string, new JTextField(20));
+			fields.get(string).setEditable(false);
+			
+			displayPanel.add(labels.get(string), "growx, pushx");
+			displayPanel.add(fields.get(string), "growx, pushx");
+		}
 		
 		add(displayPanel, BorderLayout.CENTER);
 		
@@ -190,7 +155,8 @@ public class BankApplication extends JFrame {
 			public void actionPerformed(ActionEvent e){
 				if(table.get(currentItem).getAccountType().trim().equals("Current")){
 					String newOverdraftStr = JOptionPane.showInputDialog(null, "Enter new Overdraft", JOptionPane.OK_CANCEL_OPTION);
-					overdraftTextField.setText(newOverdraftStr);
+					//new way of displaying overdraft
+					fields.get("Overdraft").setText(newOverdraftStr);
 					table.get(currentItem).setOverdraft(Double.parseDouble(newOverdraftStr));
 				}
 				else
@@ -333,9 +299,9 @@ public class BankApplication extends JFrame {
 		
 		modifyItem.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				surnameTextField.setEditable(true);
-				firstNameTextField.setEditable(true);
-				
+				//new way of editing surname and firstname
+				fields.get("Surname").setEditable(true);
+				fields.get("First Name").setEditable(true);
 				openValues = true;
 			}
 		});
@@ -432,13 +398,14 @@ public class BankApplication extends JFrame {
 					   
 					 if(sName.equalsIgnoreCase((entry.getValue().getSurname().trim()))){
 						 found = true;
-						 accountIDTextField.setText(entry.getValue().getAccountID()+"");
-						 accountNumberTextField.setText(entry.getValue().getAccountNumber());
-						 surnameTextField.setText(entry.getValue().getSurname());
-						 firstNameTextField.setText(entry.getValue().getFirstName());
-						 accountTypeTextField.setText(entry.getValue().getAccountType());
-						 balanceTextField.setText(entry.getValue().getBalance()+"");
-						 overdraftTextField.setText(entry.getValue().getOverdraft()+"");
+						 //new way of displaying details 
+						 fields.get("Account ID").setText(entry.getValue().getAccountID()+"");
+						 fields.get("Account Number").setText(entry.getValue().getAccountNumber()+"");
+						 fields.get("Surname").setText(entry.getValue().getSurname()+"");
+						 fields.get("First Name").setText(entry.getValue().getFirstName()+"");
+						 fields.get("Account Type").setText(entry.getValue().getAccountType()+"");
+						 fields.get("Balance").setText(entry.getValue().getBalance()+"");
+						 fields.get("Overdraft").setText(entry.getValue().getOverdraft()+"");
 					 }
 				 }		
 				 if(found)
@@ -458,13 +425,14 @@ public class BankApplication extends JFrame {
 					   
 					 if(accNum.equals(entry.getValue().getAccountNumber().trim())){
 						 found = true;
-						 accountIDTextField.setText(entry.getValue().getAccountID()+"");
-						 accountNumberTextField.setText(entry.getValue().getAccountNumber());
-						 surnameTextField.setText(entry.getValue().getSurname());
-						 firstNameTextField.setText(entry.getValue().getFirstName());
-						 accountTypeTextField.setText(entry.getValue().getAccountType());
-						 balanceTextField.setText(entry.getValue().getBalance()+"");
-						 overdraftTextField.setText(entry.getValue().getOverdraft()+"");						
+						//new way of displaying details 
+						 fields.get("Account ID").setText(entry.getValue().getAccountID()+"");
+						 fields.get("Account Number").setText(entry.getValue().getAccountNumber()+"");
+						 fields.get("Surname").setText(entry.getValue().getSurname()+"");
+						 fields.get("First Name").setText(entry.getValue().getFirstName()+"");
+						 fields.get("Account Type").setText(entry.getValue().getAccountType()+"");
+						 fields.get("Balance").setText(entry.getValue().getBalance()+"");
+						 fields.get("Overdraft").setText(entry.getValue().getOverdraft()+"");					
 						 
 					 }			 
 				 }
@@ -546,26 +514,26 @@ public class BankApplication extends JFrame {
 	
 	public void saveOpenValues(){		
 		if (openValues){
-			surnameTextField.setEditable(false);
-			firstNameTextField.setEditable(false);
+			fields.get("Surname").setEditable(false);
+			fields.get("First Name").setEditable(false);
 				
-			table.get(currentItem).setSurname(surnameTextField.getText());
-			table.get(currentItem).setFirstName(firstNameTextField.getText());
+			table.get(currentItem).setSurname(fields.get("Surname").getText());
+			table.get(currentItem).setFirstName(fields.get("First Name").getText());
 		}
 	}	
 	
 	public void displayDetails(int currentItem) {	
 				
-		accountIDTextField.setText(table.get(currentItem).getAccountID()+"");
-		accountNumberTextField.setText(table.get(currentItem).getAccountNumber());
-		surnameTextField.setText(table.get(currentItem).getSurname());
-		firstNameTextField.setText(table.get(currentItem).getFirstName());
-		accountTypeTextField.setText(table.get(currentItem).getAccountType());
-		balanceTextField.setText(table.get(currentItem).getBalance()+"");
-		if(accountTypeTextField.getText().trim().equals("Current"))
-			overdraftTextField.setText(table.get(currentItem).getOverdraft()+"");
+		fields.get("Account ID").setText(table.get(currentItem).getAccountID()+"");
+		fields.get("Account Number").setText(table.get(currentItem).getAccountNumber());
+		fields.get("Surname").setText(table.get(currentItem).getSurname());
+		fields.get("First Name").setText(table.get(currentItem).getFirstName());
+		fields.get("Account Type").setText(table.get(currentItem).getAccountType());
+		fields.get("Balance").setText(table.get(currentItem).getBalance()+"");
+		if(fields.get("Account Type").getText().trim().equals("Current"))
+			fields.get("Overdraft").setText(table.get(currentItem).getOverdraft()+"");
 		else
-			overdraftTextField.setText("Only applies to current accs");
+			fields.get("Overdraft").setText("Only applies to current accs");
 	
 	}
 	
