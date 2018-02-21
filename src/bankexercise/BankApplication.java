@@ -20,23 +20,23 @@ public class BankApplication extends JFrame {
 	private JMenuBar menuBar;
 	private JMenu navigateMenu, recordsMenu, transactionsMenu, fileMenu, exitMenu;
 	private JMenuItem closeApp;
-	static JFileChooser fc;
-	JTable jTable;
-	double interestRate;
-	int currentItem = 0;
-	boolean openValues;
+	private static JFileChooser fc;
+	private JTable jTable;
+	private double interestRate;
+	private int currentItem = 0;
+	private boolean openValues;
 	
 	String[] details = {"Account ID", "Account Number", "First Name", "Surname", "Account Type", "Balance", "Overdraft"};
 	Map<String, JLabel> labels = new HashMap<String, JLabel>();
 	Map<String, JTextField> fields = new HashMap<String, JTextField>();
 	
-	Map<String, JMenuItem> navMenuItems = new HashMap<String, JMenuItem>();
+	private Map<String, JMenuItem> navMenuItems = new HashMap<String, JMenuItem>();
 	
-	Map<String, JMenuItem> recordMenuItems = new HashMap<String, JMenuItem>();
+	private Map<String, JMenuItem> recordMenuItems = new HashMap<String, JMenuItem>();
 	
-	Map<String, JMenuItem> transactionMenuItems = new HashMap<String, JMenuItem>();
+	private Map<String, JMenuItem> transactionMenuItems = new HashMap<String, JMenuItem>();
 	
-	Map<String, JMenuItem> fileMenuItems = new HashMap<String, JMenuItem>();
+	private Map<String, JMenuItem> fileMenuItems = new HashMap<String, JMenuItem>();
 	
 	private String [] images = {"first.png", "prev.png", "next.png", "last.png"};
 	private JButton[] imageButtons = new JButton[images.length];
