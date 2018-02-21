@@ -19,7 +19,7 @@ public class BankApplication extends JFrame {
 	
 	ArrayList<BankAccount> accountList = new ArrayList<>();
 	static HashMap<Integer, BankAccount> table = new HashMap<>();
-	private final static int TABLE_SIZE = 29;
+	final static int TABLE_SIZE = 29;
 	
 	
 	JMenuBar menuBar;

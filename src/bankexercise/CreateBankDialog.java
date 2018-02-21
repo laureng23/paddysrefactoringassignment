@@ -11,7 +11,7 @@ public class CreateBankDialog extends JFrame {
 
 	
 	private static final long serialVersionUID = 1L;
-	private final static int TABLE_SIZE = 29;
+	
 	Random rand = new Random();
 	
 	ArrayList<BankAccount> accountList;
@@ -22,7 +22,7 @@ public class CreateBankDialog extends JFrame {
 	
 	
 	public void put(int key, BankAccount value){
-		int hash = (key%TABLE_SIZE);
+		int hash = (key%BankApplication.TABLE_SIZE);
 
 		while(table.containsKey(key)){
 			hash = hash+1;
@@ -49,37 +49,27 @@ public class CreateBankDialog extends JFrame {
 		
 		JPanel dataPanel = new JPanel(new MigLayout());
 		
-		
-		
-		
-		
-		
-		
 		String[] comboTypes = {"Current", "Deposit"};
 		
 		
 		final JComboBox<String> comboBox = new JComboBox<String>(comboTypes);
 		
-		
-		accountNumberLabel = new JLabel("Photograph file name: ");
-		accountNumberTextField = new JTextField(15);
-		
 		accountNumberLabel = new JLabel("Account Number: ");
-		accountNumberTextField = new JTextField(15);
+		accountNumberTextField = new JTextField(8);
 		accountNumberTextField.setEditable(true);
 		
 		dataPanel.add(accountNumberLabel, "growx, pushx");
 		dataPanel.add(accountNumberTextField, "growx, pushx, wrap");
 
 		surnameLabel = new JLabel("Last Name: ");
-		surnameTextField = new JTextField(15);
+		surnameTextField = new JTextField(20);
 		surnameTextField.setEditable(true);
 		
 		dataPanel.add(surnameLabel, "growx, pushx");
 		dataPanel.add(surnameTextField, "growx, pushx, wrap");
 
 		firstNameLabel = new JLabel("First Name: ");
-		firstNameTextField = new JTextField(15);
+		firstNameTextField = new JTextField(20);
 		firstNameTextField.setEditable(true);
 		
 		dataPanel.add(firstNameLabel, "growx, pushx");
@@ -135,13 +125,9 @@ public class CreateBankDialog extends JFrame {
 				String accountType = comboBox.getSelectedItem().toString();
 				
 				
-				if(surname.length() > 20 || firstName.length() >20) {
-					JOptionPane.showMessageDialog(null, "Name must be smaller that 20 charachters");		
-					
-				}
 				
-
-				
+			
+			
 	
 				if (accountNumber != null && accountNumber.length()==8 && surname != null && firstName != null && accountType != null) {
 					try {
@@ -174,7 +160,7 @@ public class CreateBankDialog extends JFrame {
 							
 							int key = Integer.parseInt(account.getAccountNumber());
 							
-							int hash = (key%TABLE_SIZE);
+							int hash = (key%BankApplication.TABLE_SIZE);
 							
 							while(table.containsKey(hash)){
 								hash = hash+1;
