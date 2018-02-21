@@ -12,8 +12,8 @@ import net.miginfocom.swing.MigLayout;
 
 public class BankApplication extends JFrame {
 	
-	ArrayList<BankAccount> accountList = new ArrayList<BankAccount>();
-	static HashMap<Integer, BankAccount> table = new HashMap<Integer, BankAccount>();
+	ArrayList<BankAccount> accountList = new ArrayList<>();
+	static HashMap<Integer, BankAccount> table = new HashMap<>();
 	private final static int TABLE_SIZE = 29;
 	static private final String newline = "\n";
 	
@@ -45,6 +45,8 @@ public class BankApplication extends JFrame {
 	
 	private String [] images = {"first.png", "prev.png", "next.png", "last.png"};
 	private JButton[] imageButtons = new JButton[images.length];
+	
+	
 	
 	public BankApplication() {
 		

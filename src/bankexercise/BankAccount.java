@@ -11,7 +11,7 @@ public class BankAccount {
 	private double balance;
 	private double overdraft;
 	
-	public static int count = 0;
+	public static final int count = 0;//prevent it ever being changed
 	
 	public BankAccount(int accountID, String accountNumber, String surname, String firstName, String accountType, double balance, double overdraft){
 		this.accountID = accountID;
@@ -59,14 +59,6 @@ public class BankAccount {
 	
 	public void setAccountType(String accountType) {
 		this.accountType = accountType;
-	}
-	
-	public void setAccType(String accType){
-		accType = accType;
-	}
-	
-	public String getAccType(){
-		return accountType;
 	}
 	
 	public String getFirstName() {
