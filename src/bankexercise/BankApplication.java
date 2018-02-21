@@ -17,11 +17,9 @@ public class BankApplication extends JFrame {
 	static HashMap<Integer, BankAccount> table = new HashMap<>();
 	final static int TABLE_SIZE = 29;
 	
-	JMenuBar menuBar;
-	JMenu navigateMenu, recordsMenu, transactionsMenu, fileMenu, exitMenu;
-	JMenuItem closeApp;
-	JLabel accountIDLabel, accountNumberLabel, firstNameLabel, surnameLabel, accountTypeLabel, balanceLabel, overdraftLabel;
-	JTextField accountIDTextField, accountNumberTextField, firstNameTextField, surnameTextField, accountTypeTextField, balanceTextField, overdraftTextField;
+	private JMenuBar menuBar;
+	private JMenu navigateMenu, recordsMenu, transactionsMenu, fileMenu, exitMenu;
+	private JMenuItem closeApp;
 	static JFileChooser fc;
 	JTable jTable;
 	double interestRate;
