@@ -151,7 +151,10 @@ public class BankApplication extends JFrame {
 
 				if(table.size() ==0) {
 					JOptionPane.showMessageDialog(null, "No accounts in the system");
-				}else {
+				}if(table.get(currentItem)==null) {
+					JOptionPane.showMessageDialog(null, "No accounts selected");
+				}
+				else {
 					saveOpenValues();
 
 					currentItem=0;
@@ -176,7 +179,8 @@ public class BankApplication extends JFrame {
 
 				if(table.size() ==0) {
 					JOptionPane.showMessageDialog(null, "No accounts in the system");
-				}else {
+				}
+				else {
 
 
 					while(i<TABLE_SIZE){
@@ -220,7 +224,10 @@ public class BankApplication extends JFrame {
 
 				if(table.size() ==0) {
 					JOptionPane.showMessageDialog(null, "No accounts in the system");
-				}else {
+				}if(table.get(currentItem)==null) {
+					JOptionPane.showMessageDialog(null, "No accounts selected");
+				}
+				else {
 
 					while(i<TABLE_SIZE){
 						i++;
@@ -250,7 +257,10 @@ public class BankApplication extends JFrame {
 
 				if(table.size() ==0) {
 					JOptionPane.showMessageDialog(null, "No accounts in the system");
-				}else {
+				}if(table.get(currentItem)==null) {
+					JOptionPane.showMessageDialog(null, "No accounts selected");
+				}
+				else {
 					saveOpenValues();
 
 					currentItem =29;
