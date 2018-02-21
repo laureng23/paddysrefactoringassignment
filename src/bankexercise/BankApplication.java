@@ -14,6 +14,9 @@ import net.miginfocom.swing.MigLayout;
 
 public class BankApplication extends JFrame {
 	
+
+	private static final long serialVersionUID = 1L;
+	
 	ArrayList<BankAccount> accountList = new ArrayList<>();
 	static HashMap<Integer, BankAccount> table = new HashMap<>();
 	private final static int TABLE_SIZE = 29;
