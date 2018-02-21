@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.*;
+import java.util.Map.Entry;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -203,12 +205,12 @@ public class BankApplication extends JFrame {
 				}
 				
 				int minKey = Collections.min(keyList);
-				//System.out.println(minKey);
+				
 				
 				if(currentItem>minKey){
 					currentItem--;
 					while(!table.containsKey(currentItem)){
-						//System.out.println("Current: " + currentItem + ", min key: " + minKey);
+						
 						currentItem--;
 					}
 				}
@@ -368,14 +370,8 @@ public class BankApplication extends JFrame {
 					   
 					 if(sName.equalsIgnoreCase((entry.getValue().getSurname().trim()))){
 						 found = true;
-						 //new way of displaying details 
-						 fields.get("Account ID").setText(entry.getValue().getAccountID()+"");
-						 fields.get("Account Number").setText(entry.getValue().getAccountNumber()+"");
-						 fields.get("Surname").setText(entry.getValue().getSurname()+"");
-						 fields.get("First Name").setText(entry.getValue().getFirstName()+"");
-						 fields.get("Account Type").setText(entry.getValue().getAccountType()+"");
-						 fields.get("Balance").setText(entry.getValue().getBalance()+"");
-						 fields.get("Overdraft").setText(entry.getValue().getOverdraft()+"");
+						 //new way of displaying details using reusable method
+						 setTextEntry(entry);
 					 }
 				 }		
 				 if(found)
@@ -395,14 +391,8 @@ public class BankApplication extends JFrame {
 					   
 					 if(accNum.equals(entry.getValue().getAccountNumber().trim())){
 						 found = true;
-						//new way of displaying details 
-						 fields.get("Account ID").setText(entry.getValue().getAccountID()+"");
-						 fields.get("Account Number").setText(entry.getValue().getAccountNumber()+"");
-						 fields.get("Surname").setText(entry.getValue().getSurname()+"");
-						 fields.get("First Name").setText(entry.getValue().getFirstName()+"");
-						 fields.get("Account Type").setText(entry.getValue().getAccountType()+"");
-						 fields.get("Balance").setText(entry.getValue().getBalance()+"");
-						 fields.get("Overdraft").setText(entry.getValue().getOverdraft()+"");					
+						//new way of displaying details using reusable method 
+						 setTextEntry(entry);
 						 
 					 }			 
 				 }
@@ -425,7 +415,7 @@ public class BankApplication extends JFrame {
 						String toDeposit = JOptionPane.showInputDialog("Account found, Enter Amount to Deposit: ");
 						entry.getValue().setBalance(entry.getValue().getBalance() + Double.parseDouble(toDeposit));
 						displayDetails(entry.getKey());
-						//balanceTextField.setText(entry.getValue().getBalance()+"");
+
 					}
 				}
 				if (!found)
@@ -473,7 +463,6 @@ public class BankApplication extends JFrame {
 					if(entry.getValue().getAccountType().equals("Deposit")){
 						double equation = 1 + ((interestRate)/100);
 						entry.getValue().setBalance(entry.getValue().getBalance()*equation);
-						//System.out.println(equation);
 						JOptionPane.showMessageDialog(null, "Balances Updated");
 						displayDetails(entry.getKey());
 					}
@@ -513,6 +502,10 @@ public class BankApplication extends JFrame {
 			items.put(item, new JMenuItem(item));
 			menu.add(items.get(item));
 		});
+	}
+	
+	public void setTextEntry(Entry<Integer, BankAccount> entry) {
+		setTextEntry(entry);
 	}
 	
 	
