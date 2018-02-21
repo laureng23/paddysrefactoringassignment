@@ -15,9 +15,9 @@ public class CreateBankDialog extends JFrame {
 
 	HashMap<Integer, BankAccount> table = new HashMap<Integer, BankAccount>();
 	
-	 JLabel accountIDLabel, accountNumberLabel, firstNameLabel, surnameLabel, accountTypeLabel, balanceLabel, overdraftLabel;
-	 JTextField accountNumberTextField;
-	 final JTextField firstNameTextField, surnameTextField, accountTypeTextField, balanceTextField, overdraftTextField;
+	private JLabel accountNumberLabel, firstNameLabel, surnameLabel, accountTypeLabel, balanceLabel, overdraftLabel;
+	private JTextField accountNumberTextField;
+	private final JTextField firstNameTextField, surnameTextField, accountTypeTextField, balanceTextField, overdraftTextField;
 	
 	public void put(int key, BankAccount value){
 		int hash = (key%BankApplication.TABLE_SIZE);
