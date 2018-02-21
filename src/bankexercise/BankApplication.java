@@ -6,21 +6,16 @@ import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.*;
 import java.util.Map.Entry;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-
 import net.miginfocom.swing.MigLayout;
 
 public class BankApplication extends JFrame {
 	
-
 	private static final long serialVersionUID = 1L;
-	
 	ArrayList<BankAccount> accountList = new ArrayList<>();
 	static HashMap<Integer, BankAccount> table = new HashMap<>();
 	final static int TABLE_SIZE = 29;
-	
 	
 	JMenuBar menuBar;
 	JMenu navigateMenu, recordsMenu, transactionsMenu, fileMenu, exitMenu;
@@ -30,10 +25,7 @@ public class BankApplication extends JFrame {
 	static JFileChooser fc;
 	JTable jTable;
 	double interestRate;
-	
 	int currentItem = 0;
-	
-	
 	boolean openValues;
 	
 	String[] details = {"Account ID", "Account Number", "First Name", "Surname", "Account Type", "Balance", "Overdraft"};
@@ -57,11 +49,9 @@ public class BankApplication extends JFrame {
 	private FileHelper fileHelper;
 	
 	
-	
 	public BankApplication() {
 		
 		super("Bank Application");
-		
 		initComponents();
 		fileHelper = new FileHelper(fileToSaveAs, input, output);
 	}
@@ -472,7 +462,7 @@ public class BankApplication extends JFrame {
 		});		
 	}
 	
-	public void saveOpenValues(){		
+	private void saveOpenValues(){		
 		if (openValues){
 			fields.get("Surname").setEditable(false);
 			fields.get("First Name").setEditable(false);

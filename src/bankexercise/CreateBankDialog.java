@@ -8,7 +8,6 @@ import javax.swing.*;
 import net.miginfocom.swing.MigLayout;
 
 public class CreateBankDialog extends JFrame {
-
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -18,8 +17,10 @@ public class CreateBankDialog extends JFrame {
 
 	HashMap<Integer, BankAccount> table = new HashMap<Integer, BankAccount>();
 	
-	
-	
+	JLabel accountIDLabel, accountNumberLabel, firstNameLabel, surnameLabel, accountTypeLabel, balanceLabel, overdraftLabel;
+	JComboBox <String>comboBox;
+	JTextField accountNumberTextField;
+	final JTextField firstNameTextField, surnameTextField, accountTypeTextField, balanceTextField, overdraftTextField;
 	
 	public void put(int key, BankAccount value){
 		int hash = (key%BankApplication.TABLE_SIZE);
@@ -29,15 +30,6 @@ public class CreateBankDialog extends JFrame {
 		}
 		table.put(hash, value);
 	}
-	
-
-	JLabel accountIDLabel, accountNumberLabel, firstNameLabel, surnameLabel, accountTypeLabel, balanceLabel, overdraftLabel;
-	
-	
-	
-	JComboBox <String>comboBox;
-	JTextField accountNumberTextField;
-	final JTextField firstNameTextField, surnameTextField, accountTypeTextField, balanceTextField, overdraftTextField;
 	
 	CreateBankDialog(HashMap<Integer, BankAccount> accounts) {
 		
@@ -51,34 +43,29 @@ public class CreateBankDialog extends JFrame {
 		
 		String[] comboTypes = {"Current", "Deposit"};
 		
-		
 		final JComboBox<String> comboBox = new JComboBox<String>(comboTypes);
 		
 		accountNumberLabel = new JLabel("Account Number: ");
 		accountNumberTextField = new JTextField(8);
 		accountNumberTextField.setEditable(true);
-		
 		dataPanel.add(accountNumberLabel, "growx, pushx");
 		dataPanel.add(accountNumberTextField, "growx, pushx, wrap");
 
 		surnameLabel = new JLabel("Last Name: ");
 		surnameTextField = new JTextField(20);
 		surnameTextField.setEditable(true);
-		
 		dataPanel.add(surnameLabel, "growx, pushx");
 		dataPanel.add(surnameTextField, "growx, pushx, wrap");
 
 		firstNameLabel = new JLabel("First Name: ");
 		firstNameTextField = new JTextField(20);
 		firstNameTextField.setEditable(true);
-		
 		dataPanel.add(firstNameLabel, "growx, pushx");
 		dataPanel.add(firstNameTextField, "growx, pushx, wrap");
 
 		accountTypeLabel = new JLabel("Account Type: ");
 		accountTypeTextField = new JTextField(5);
 		accountTypeTextField.setEditable(true);
-		
 		dataPanel.add(accountTypeLabel, "growx, pushx");	
 		dataPanel.add(comboBox, "growx, pushx, wrap");
 
@@ -86,7 +73,6 @@ public class CreateBankDialog extends JFrame {
 		balanceTextField = new JTextField(10);
 		balanceTextField.setText("0.0");
 		balanceTextField.setEditable(false);
-		
 		dataPanel.add(balanceLabel, "growx, pushx");
 		dataPanel.add(balanceTextField, "growx, pushx, wrap");
 		
@@ -94,7 +80,6 @@ public class CreateBankDialog extends JFrame {
 		overdraftTextField = new JTextField(10);
 		overdraftTextField.setText("0.0");
 		overdraftTextField.setEditable(false);
-		
 		dataPanel.add(overdraftLabel, "growx, pushx");
 		dataPanel.add(overdraftTextField, "growx, pushx, wrap");
 		
@@ -103,39 +88,28 @@ public class CreateBankDialog extends JFrame {
 		JPanel buttonPanel = new JPanel(new FlowLayout());
 		JButton addButton = new JButton("Add");
 		JButton cancelButton = new JButton("Cancel");
-		
 		buttonPanel.add(addButton);
 		buttonPanel.add(cancelButton);
 		
 		add(buttonPanel, BorderLayout.SOUTH);
 		
+		
 		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				
-				
 				String accountNumber = accountNumberTextField.getText();
-				
-				
-							
-				
 				String surname = surnameTextField.getText();
 				String firstName = firstNameTextField.getText();
 			
 				String accountType = comboBox.getSelectedItem().toString();
 				
 				
-				
-			
-			
-	
 				if (accountNumber != null && accountNumber.length()==8 && surname != null && firstName != null && accountType != null) {
 					try {
 						
-						
 						boolean accNumTaken=false;
-							
-							int randNumber = rand.nextInt(24) + 1;
+						
+						int randNumber = rand.nextInt(24) + 1;
 						
 						 for (Map.Entry<Integer, BankAccount> entry : table.entrySet()) {
 							 
@@ -144,20 +118,16 @@ public class CreateBankDialog extends JFrame {
 								 randNumber = rand.nextInt(24)+1;
 							 }		 
 						 }
-					 
+						 
 							for (Map.Entry<Integer, BankAccount> entry : table.entrySet()) {					
 								 if(entry.getValue().getAccountNumber().trim().equals(accountNumberTextField.getText())){
 									 accNumTaken=true;	
-									 
 								 }
 							 }
-						
 						if(!accNumTaken){
-						
 						
 							BankAccount account = new BankAccount(randNumber, accountNumber, surname, firstName, accountType, 0.0, 0.0);
 						
-							
 							int key = Integer.parseInt(account.getAccountNumber());
 							
 							int hash = (key%BankApplication.TABLE_SIZE);
@@ -191,7 +161,4 @@ public class CreateBankDialog extends JFrame {
 		setVisible(true);
 
 	}
-	
-	
-	
 }
