@@ -440,6 +440,11 @@ public class BankApplication extends JFrame {
 		
 		transactionMenuItems.get("Withdraw").addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
+				if(table.size()==0) {
+					JOptionPane.showMessageDialog(null, "No Accounts to withdraw from.");
+				}else {
+					
+				
 				String accNum = JOptionPane.showInputDialog("Account number to withdraw from: ");
 				
 				boolean found = false;
@@ -472,6 +477,7 @@ public class BankApplication extends JFrame {
 					}
 				}if(!found)
 					JOptionPane.showMessageDialog(null, "Account number " + accNum + " not found.");
+				}
 			}
 		});
 		
