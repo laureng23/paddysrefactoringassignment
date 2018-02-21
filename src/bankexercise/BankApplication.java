@@ -94,7 +94,7 @@ public class BankApplication extends JFrame {
     	
     		ArrayList<String> recordMenuLabels = new ArrayList<String>(
     				Arrays.asList("Create Item", "Modify Item", "Delete Item", "Set Overdraft", "Set Interest"));
-    		setMenuItems(recordMenuItems, navigateMenu, recordMenuLabels);
+    		setMenuItems(recordMenuItems, recordsMenu, recordMenuLabels);
     	
     	menuBar.add(recordsMenu);
     	
