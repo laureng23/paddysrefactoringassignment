@@ -38,6 +38,7 @@ public class FileHelper {
 	private void saveToFile(HashMap<Integer, BankAccount>table) {
 		RandomAccessBankAccount record = new RandomAccessBankAccount();
 		
+		
 		Scanner input = new Scanner(System.in);
 		
 		for (Map.Entry<Integer, BankAccount> entry : table.entrySet()) {

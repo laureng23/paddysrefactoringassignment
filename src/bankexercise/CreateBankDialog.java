@@ -135,12 +135,14 @@ public class CreateBankDialog extends JFrame {
 				String accountType = comboBox.getSelectedItem().toString();
 				
 				
-				
+				if(surname.length() > 20 || firstName.length() >20) {
+					JOptionPane.showMessageDialog(null, "Name must be smaller that 20 charachters");		
+					
+				}
 				
 
 				
-				
-		
+	
 				if (accountNumber != null && accountNumber.length()==8 && surname != null && firstName != null && accountType != null) {
 					try {
 						
