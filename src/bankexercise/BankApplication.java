@@ -60,7 +60,6 @@ public class BankApplication extends JFrame {
 		setLayout(new BorderLayout());
 		JPanel displayPanel = new JPanel(new MigLayout());
 
-		//for loop for JLabel & JTextFields
 		for(String string: details) {
 			labels.put(string, new JLabel(string + ": "));
 			fields.put(string, new JTextField(20));
@@ -78,7 +77,6 @@ public class BankApplication extends JFrame {
 			imageButtons[i] = new JButton(new ImageIcon(images[i]));
 			buttonPanel.add(imageButtons[i]);
 		}
-		
 		add(buttonPanel, BorderLayout.SOUTH);
 		
 		menuBar = new JMenuBar();
@@ -98,41 +96,41 @@ public class BankApplication extends JFrame {
     				Arrays.asList("Create Item", "Modify Item", "Delete Item", "Set Overdraft", "Set Interest"));
     		setMenuItems(recordMenuItems, recordsMenu, recordMenuLabels);
     	
-    	menuBar.add(recordsMenu);
+    		menuBar.add(recordsMenu);
     	
-    	transactionsMenu = new JMenu("Transactions");
+    		transactionsMenu = new JMenu("Transactions");
     	
-   ArrayList<String> transactionMenuLabels = new ArrayList<String>(
-		   Arrays.asList("Deposit", "Withdraw", "Calculate Interest"));
-   setMenuItems(transactionMenuItems, transactionsMenu, transactionMenuLabels);
+    		ArrayList<String> transactionMenuLabels = new ArrayList<String>(
+    				Arrays.asList("Deposit", "Withdraw", "Calculate Interest"));
+    		setMenuItems(transactionMenuItems, transactionsMenu, transactionMenuLabels);
     	
     	
-    	menuBar.add(transactionsMenu);
+    		menuBar.add(transactionsMenu);
     	
-    	fileMenu = new JMenu("File");
+    		fileMenu = new JMenu("File");
     	
-   ArrayList<String> fileMenuLabels = new ArrayList<String>(
-		   Arrays.asList("Open File", "Save File", "Save As"));
-   setMenuItems(fileMenuItems, fileMenu, fileMenuLabels);
+    		ArrayList<String> fileMenuLabels = new ArrayList<String>(
+    				Arrays.asList("Open File", "Save File", "Save As"));
+    		setMenuItems(fileMenuItems, fileMenu, fileMenuLabels);
     	
    
-    	menuBar.add(fileMenu);
+    		menuBar.add(fileMenu);
     	
-    	exitMenu = new JMenu("Exit");
+    		exitMenu = new JMenu("Exit");
     	
-    	closeApp = new JMenuItem("Close Application");
+    		closeApp = new JMenuItem("Close Application");
     	
-    	exitMenu.add(closeApp);
+    		exitMenu.add(closeApp);
     	
-    	menuBar.add(exitMenu);
+    		menuBar.add(exitMenu);
     	
-    	setDefaultCloseOperation(EXIT_ON_CLOSE);
+    		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	
 		recordMenuItems.get("Set Overdraft").addActionListener(new ActionListener(){
+			
 			public void actionPerformed(ActionEvent e){
 				if(table.get(currentItem).getAccountType().trim().equals("Current")){
 					String newOverdraftStr = JOptionPane.showInputDialog(null, "Enter new Overdraft", JOptionPane.OK_CANCEL_OPTION);
-					//new way of displaying overdraft
 					fields.get("Overdraft").setText(newOverdraftStr);
 					table.get(currentItem).setOverdraft(Double.parseDouble(newOverdraftStr));
 				}
@@ -305,7 +303,6 @@ public class BankApplication extends JFrame {
 				}
 				frame.setSize(600,500);
 				frame.add(scrollPane);
-				//frame.pack();
 		        frame.setVisible(true);			
 			}
 		});
@@ -344,11 +341,6 @@ public class BankApplication extends JFrame {
 				}
 				else if(answer == JOptionPane.NO_OPTION)
 					dispose();
-				else if(answer==0)
-					;
-				
-				
-				
 			}
 		});	
 		
@@ -385,14 +377,12 @@ public class BankApplication extends JFrame {
 						 found = true;
 						//new way of displaying details using reusable method 
 						 setTextEntry(entry);
-						 
 					 }			 
 				 }
 				 if(found)
 					 JOptionPane.showMessageDialog(null, "Account number " + accNum + " found.");
 				 else
 					 JOptionPane.showMessageDialog(null, "Account number " + accNum + " not found.");
-				
 			}
 		});
 		
@@ -484,7 +474,6 @@ public class BankApplication extends JFrame {
 			fields.get("Overdraft").setText(table.get(currentItem).getOverdraft()+"");
 		else
 			fields.get("Overdraft").setText("Only applies to current accs");
-	
 	}
 	
 	private void setMenuItems(Map<String, JMenuItem> items, JMenu menu, ArrayList<String> menuItems) {
@@ -499,18 +488,13 @@ public class BankApplication extends JFrame {
 		setTextEntry(entry);
 	}
 	
-	
-	
-	
 	public void put(int key, BankAccount value){
 		int hash = (key%TABLE_SIZE);
 	
 		while(table.containsKey(key)){
 			hash = hash+1;
-		
 		}
 		table.put(hash, value);
-
 	}
 	
 	public static void main(String[] args) {
