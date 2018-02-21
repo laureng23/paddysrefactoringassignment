@@ -141,13 +141,21 @@ public class BankApplication extends JFrame {
 		ActionListener first = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				saveOpenValues();
-				
-				currentItem=0;
-				while(!table.containsKey(currentItem)){
-					currentItem++;
+				if(table.size() ==0) {
+					JOptionPane.showMessageDialog(null, "Nothing to show");
+				}else {
+					saveOpenValues();
+					
+					currentItem=0;
+					
+					while(!table.containsKey(currentItem)){
+						currentItem++;
+					}
+					displayDetails(currentItem);
+					
 				}
-				displayDetails(currentItem);
+				
+				
 			}
 		};
 		
@@ -158,11 +166,19 @@ public class BankApplication extends JFrame {
 				ArrayList<Integer> keyList = new ArrayList<Integer>();
 				int i=0;
 		
-				while(i<TABLE_SIZE){
-					i++;
-					if(table.containsKey(i))
-						keyList.add(i);
-				}
+				if(table.size() ==0) {
+					JOptionPane.showMessageDialog(null, "Nothing to show");
+				}else {
+				
+				
+					while(i<TABLE_SIZE){
+						i++;
+						if(table.containsKey(i))
+							keyList.add(i);
+					}
+					
+				
+				
 				
 				int maxKey = Collections.max(keyList);
 		
@@ -174,7 +190,12 @@ public class BankApplication extends JFrame {
 							currentItem++;
 						}
 					}
-					displayDetails(currentItem);			
+					displayDetails(currentItem);	
+					
+					if(currentItem == 0) {
+						JOptionPane.showMessageDialog(null, "Nothing to show");
+					}
+				}
 			}
 		};
 		
@@ -183,27 +204,36 @@ public class BankApplication extends JFrame {
 		ActionListener prev = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				
 				ArrayList<Integer> keyList = new ArrayList<Integer>();
+				
+					
 				int i=0;
+				
+				if(table.size() ==0) {
+					JOptionPane.showMessageDialog(null, "Nothing to show");
+				}else {
 		
-				while(i<TABLE_SIZE){
-					i++;
-					if(table.containsKey(i))
-						keyList.add(i);
-				}
-				
-				int minKey = Collections.min(keyList);
-				
-				
-				if(currentItem>minKey){
-					currentItem--;
-					while(!table.containsKey(currentItem)){
-						
-						currentItem--;
+					while(i<TABLE_SIZE){
+						i++;
+						if(table.containsKey(i))
+							keyList.add(i);
 					}
-				}
-				displayDetails(currentItem);				
+					
+					int minKey = Collections.min(keyList);
+					
+					
+					if(currentItem>minKey){
+						currentItem--;
+						while(!table.containsKey(currentItem)){
+							
+							currentItem--;
+						}
+					}
+					displayDetails(currentItem);		
+					}
 			}
+			
 		};
 	
 		ActionListener last = new ActionListener() {
@@ -211,6 +241,10 @@ public class BankApplication extends JFrame {
 				saveOpenValues();
 				
 				currentItem =29;
+				
+				if(table.size() ==0) {
+					JOptionPane.showMessageDialog(null, "Nothing to show");
+				}else {
 								
 				while(!table.containsKey(currentItem)){
 					currentItem--;
@@ -219,6 +253,7 @@ public class BankApplication extends JFrame {
 				
 				displayDetails(currentItem);
 			}
+		}
 		};
 		
 		imageButtons[2].addActionListener(next1);
