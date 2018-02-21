@@ -12,15 +12,13 @@ public class CreateBankDialog extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
 	Random rand = new Random();
-	
-	ArrayList<BankAccount> accountList;
 
 	HashMap<Integer, BankAccount> table = new HashMap<Integer, BankAccount>();
 	
-	JLabel accountIDLabel, accountNumberLabel, firstNameLabel, surnameLabel, accountTypeLabel, balanceLabel, overdraftLabel;
-	JComboBox <String>comboBox;
-	JTextField accountNumberTextField;
-	final JTextField firstNameTextField, surnameTextField, accountTypeTextField, balanceTextField, overdraftTextField;
+	 JLabel accountIDLabel, accountNumberLabel, firstNameLabel, surnameLabel, accountTypeLabel, balanceLabel, overdraftLabel;
+	 JComboBox <String>comboBox;
+	 JTextField accountNumberTextField;
+	 final JTextField firstNameTextField, surnameTextField, accountTypeTextField, balanceTextField, overdraftTextField;
 	
 	public void put(int key, BankAccount value){
 		int hash = (key%BankApplication.TABLE_SIZE);
