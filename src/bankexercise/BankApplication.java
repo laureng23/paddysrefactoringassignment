@@ -20,7 +20,6 @@ public class BankApplication extends JFrame {
 	JMenuBar menuBar;
 	JMenu navigateMenu, recordsMenu, transactionsMenu, fileMenu, exitMenu;
 	JMenuItem closeApp;
-	JButton firstItemButton, lastItemButton, nextItemButton, prevItemButton;
 	JLabel accountIDLabel, accountNumberLabel, firstNameLabel, surnameLabel, accountTypeLabel, balanceLabel, overdraftLabel;
 	JTextField accountIDTextField, accountNumberTextField, firstNameTextField, surnameTextField, accountTypeTextField, balanceTextField, overdraftTextField;
 	static JFileChooser fc;
@@ -43,6 +42,9 @@ public class BankApplication extends JFrame {
 	Map<String, JMenuItem> transactionMenuItems = new HashMap<String, JMenuItem>();
 	
 	Map<String, JMenuItem> fileMenuItems = new HashMap<String, JMenuItem>();
+	
+	private String [] images = {"first.png", "prev.png", "next.png", "last.png"};
+	private JButton[] imageButtons = new JButton[images.length];
 	
 	public BankApplication() {
 		
@@ -70,15 +72,10 @@ public class BankApplication extends JFrame {
 		
 		JPanel buttonPanel = new JPanel(new GridLayout(1, 4));
 
-		nextItemButton = new JButton(new ImageIcon("next.png"));
-		prevItemButton = new JButton(new ImageIcon("prev.png"));
-		firstItemButton = new JButton(new ImageIcon("first.png"));
-		lastItemButton = new JButton(new ImageIcon("last.png"));
-		
-		buttonPanel.add(firstItemButton);
-		buttonPanel.add(prevItemButton);
-		buttonPanel.add(nextItemButton);
-		buttonPanel.add(lastItemButton);
+		for(int i =0; i<images.length;i++) {
+			imageButtons[i] = new JButton(new ImageIcon(images[i]));
+			buttonPanel.add(imageButtons[i]);
+		}
 		
 		add(buttonPanel, BorderLayout.SOUTH);
 		
@@ -240,16 +237,16 @@ public class BankApplication extends JFrame {
 			}
 		};
 		
-		nextItemButton.addActionListener(next1);
+		imageButtons[2].addActionListener(next1);
 		navMenuItems.get("Next Item").addActionListener(next1);
 		
-		prevItemButton.addActionListener(prev);
+		imageButtons[1].addActionListener(prev);
 		navMenuItems.get("Previous Item").addActionListener(prev);
 
-		firstItemButton.addActionListener(first);
+		imageButtons[0].addActionListener(first);
 		navMenuItems.get("First Item").addActionListener(first);
 
-		lastItemButton.addActionListener(last);
+		imageButtons[3].addActionListener(last);
 		navMenuItems.get("First Item").addActionListener(last);
 		
 		recordMenuItems.get("Delete Item").addActionListener(new ActionListener(){
