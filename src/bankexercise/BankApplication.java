@@ -441,16 +441,18 @@ public class BankApplication extends JFrame {
 		transactionMenuItems.get("Withdraw").addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				String accNum = JOptionPane.showInputDialog("Account number to withdraw from: ");
-				String toWithdraw = JOptionPane.showInputDialog("Account found, Enter Amount to Withdraw: ");
+				
+				boolean found = false;
 				
 				
 				for (Map.Entry<Integer, BankAccount> entry : table.entrySet()) {
 					
 
 					if(accNum.equals(entry.getValue().getAccountNumber().trim())){
-						
-						
+						found = true;
+						String toWithdraw = JOptionPane.showInputDialog("Account found, Enter Amount to Withdraw: ");
 						if(entry.getValue().getAccountType().trim().equals("Current")){
+							
 							if(Double.parseDouble(toWithdraw) > entry.getValue().getBalance() + entry.getValue().getOverdraft())
 								JOptionPane.showMessageDialog(null, "Transaction exceeds overdraft limit");
 							else{
@@ -459,6 +461,7 @@ public class BankApplication extends JFrame {
 							}
 						}
 						else if(entry.getValue().getAccountType().trim().equals("Deposit")){
+			
 							if(Double.parseDouble(toWithdraw) <= entry.getValue().getBalance()){
 								entry.getValue().setBalance(entry.getValue().getBalance()-Double.parseDouble(toWithdraw));
 								displayDetails(entry.getKey());
@@ -466,8 +469,9 @@ public class BankApplication extends JFrame {
 							else
 								JOptionPane.showMessageDialog(null, "Insufficient funds.");
 						}
-					}					
-				}
+					}
+				}if(!found)
+					JOptionPane.showMessageDialog(null, "Account number " + accNum + " not found.");
 			}
 		});
 		
