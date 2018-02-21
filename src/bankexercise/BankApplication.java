@@ -421,20 +421,25 @@ public class BankApplication extends JFrame {
 		
 		transactionMenuItems.get("Deposit").addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				String accNum = JOptionPane.showInputDialog("Account number to deposit into: ");
-				boolean found = false;
-				
-				for (Map.Entry<Integer, BankAccount> entry : table.entrySet()) {
-					if(accNum.equals(entry.getValue().getAccountNumber().trim())){
-						found = true;
-						String toDeposit = JOptionPane.showInputDialog("Account found, Enter Amount to Deposit: ");
-						entry.getValue().setBalance(entry.getValue().getBalance() + Double.parseDouble(toDeposit));
-						displayDetails(entry.getKey());
-
+				if(table.size()==0) {
+					JOptionPane.showMessageDialog(null, "No Accounts to deposit into.");
+				}else {
+					
+					String accNum = JOptionPane.showInputDialog("Account number to deposit into: ");
+					boolean found = false;
+					
+					for (Map.Entry<Integer, BankAccount> entry : table.entrySet()) {
+						if(accNum.equals(entry.getValue().getAccountNumber().trim())){
+							found = true;
+							String toDeposit = JOptionPane.showInputDialog("Account found, Enter Amount to Deposit: ");
+							entry.getValue().setBalance(entry.getValue().getBalance() + Double.parseDouble(toDeposit));
+							displayDetails(entry.getKey());
+	
+						}
 					}
-				}
-				if (!found)
-					JOptionPane.showMessageDialog(null, "Account number " + accNum + " not found.");
+					if (!found)
+						JOptionPane.showMessageDialog(null, "Account number " + accNum + " not found.");
+					}
 			}
 		});
 		
