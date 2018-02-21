@@ -16,7 +16,6 @@ public class CreateBankDialog extends JFrame {
 	HashMap<Integer, BankAccount> table = new HashMap<Integer, BankAccount>();
 	
 	 JLabel accountIDLabel, accountNumberLabel, firstNameLabel, surnameLabel, accountTypeLabel, balanceLabel, overdraftLabel;
-	 JComboBox <String>comboBox;
 	 JTextField accountNumberTextField;
 	 final JTextField firstNameTextField, surnameTextField, accountTypeTextField, balanceTextField, overdraftTextField;
 	
