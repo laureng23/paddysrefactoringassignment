@@ -20,7 +20,7 @@ public class BankApplication extends JFrame {
 	ArrayList<BankAccount> accountList = new ArrayList<>();
 	static HashMap<Integer, BankAccount> table = new HashMap<>();
 	private final static int TABLE_SIZE = 29;
-	static private final String newline = "\n";
+	
 	
 	JMenuBar menuBar;
 	JMenu navigateMenu, recordsMenu, transactionsMenu, fileMenu, exitMenu;
@@ -62,7 +62,6 @@ public class BankApplication extends JFrame {
 		
 		super("Bank Application");
 		
-		int currentItem;
 		initComponents();
 		fileHelper = new FileHelper(fileToSaveAs, input, output);
 	}
@@ -294,7 +293,7 @@ public class BankApplication extends JFrame {
 			public void actionPerformed(ActionEvent e){
 		
 				JFrame frame = new JFrame("TableDemo");
-				JPanel pan = new JPanel();
+				
 			
 		        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				String col[] = {"ID","Number","Name", "Account Type", "Balance", "Overdraft"};
@@ -430,14 +429,13 @@ public class BankApplication extends JFrame {
 			public void actionPerformed(ActionEvent e){
 				String accNum = JOptionPane.showInputDialog("Account number to withdraw from: ");
 				String toWithdraw = JOptionPane.showInputDialog("Account found, Enter Amount to Withdraw: ");
-				boolean found;
+				
 				
 				for (Map.Entry<Integer, BankAccount> entry : table.entrySet()) {
 					
 
 					if(accNum.equals(entry.getValue().getAccountNumber().trim())){
 						
-						found = true;
 						
 						if(entry.getValue().getAccountType().trim().equals("Current")){
 							if(Double.parseDouble(toWithdraw) > entry.getValue().getBalance() + entry.getValue().getOverdraft())
