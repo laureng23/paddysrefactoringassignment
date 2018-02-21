@@ -30,19 +30,16 @@ public class CreateBankDialog extends JFrame {
 		table.put(hash, value);
 	}
 	
-	
-	
-	
-	// Constructor code based on that for the Create and Edit dialog classes in the Shapes exercise.
 
 	JLabel accountIDLabel, accountNumberLabel, firstNameLabel, surnameLabel, accountTypeLabel, balanceLabel, overdraftLabel;
 	
 	
-	JComboBox comboBox;
+	
+	JComboBox <String>comboBox;
 	JTextField accountNumberTextField;
 	final JTextField firstNameTextField, surnameTextField, accountTypeTextField, balanceTextField, overdraftTextField;
 	
-	CreateBankDialog(HashMap accounts) {
+	CreateBankDialog(HashMap<Integer, BankAccount> accounts) {
 		
 		super("Add Bank Details");
 		
@@ -60,7 +57,8 @@ public class CreateBankDialog extends JFrame {
 		
 		String[] comboTypes = {"Current", "Deposit"};
 		
-		final JComboBox comboBox = new JComboBox(comboTypes);
+		
+		final JComboBox<String> comboBox = new JComboBox<String>(comboTypes);
 		
 		
 		accountNumberLabel = new JLabel("Photograph file name: ");
@@ -136,19 +134,17 @@ public class CreateBankDialog extends JFrame {
 			
 				String accountType = comboBox.getSelectedItem().toString();
 				
-				String balanceStr = balanceTextField.getText();
-				String overdraftStr = overdraftTextField.getText();
+				
 				
 				
 
-				double balance;
-				double overdraft;
+				
 				
 		
 				if (accountNumber != null && accountNumber.length()==8 && surname != null && firstName != null && accountType != null) {
 					try {
 						
-						boolean idTaken = false;
+						
 						boolean accNumTaken=false;
 							
 							int randNumber = rand.nextInt(24) + 1;
@@ -156,7 +152,7 @@ public class CreateBankDialog extends JFrame {
 						 for (Map.Entry<Integer, BankAccount> entry : table.entrySet()) {
 							 
 							 while(randNumber == entry.getValue().getAccountID()){
-								 idTaken = true;
+								
 								 randNumber = rand.nextInt(24)+1;
 							 }		 
 						 }
