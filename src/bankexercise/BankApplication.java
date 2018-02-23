@@ -157,12 +157,7 @@ public class BankApplication extends JFrame {
 				else {
 					saveOpenValues();
 
-					currentItem=0;
-
-					while(!table.containsKey(currentItem)){
-						currentItem++;
-					}
-					displayDetails(currentItem);
+					displayCurrentItem();
 
 				}
 
@@ -301,12 +296,7 @@ public class BankApplication extends JFrame {
 					JOptionPane.showMessageDialog(null, "Account Deleted");
 
 
-					currentItem=0;
-					while(!table.containsKey(currentItem)){
-						currentItem++;
-					}
-					displayDetails(currentItem);
-
+					displayCurrentItem();
 				}
 			}
 		});
@@ -391,11 +381,7 @@ public class BankApplication extends JFrame {
 			public void actionPerformed(ActionEvent e){
 				//readFile();
 				fileHelper.readFile(table, fc);
-				currentItem=0;
-				while(!table.containsKey(currentItem)){
-					currentItem++;
-				}
-				displayDetails(currentItem);
+				displayCurrentItem();
 			}
 		});
 
@@ -595,6 +581,14 @@ public class BankApplication extends JFrame {
 			fields.get("Overdraft").setText(table.get(currentItem).getOverdraft()+"");
 		else
 			fields.get("Overdraft").setText("Only applies to current accs");
+	}
+	
+	private void displayCurrentItem() {
+		currentItem =0;
+		do {
+			currentItem++;
+		}while ( !table.containsKey(currentItem));
+		displayDetails(currentItem);
 	}
 
 	private void setMenuItems(Map<String, JMenuItem> items, JMenu menu, ArrayList<String> menuItems) {
