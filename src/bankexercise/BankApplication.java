@@ -589,6 +589,7 @@ public class BankApplication extends JFrame {
 			currentItem++;
 		}while ( !table.containsKey(currentItem));
 		displayDetails(currentItem);
+		
 	}
 
 	private void setMenuItems(Map<String, JMenuItem> items, JMenu menu, ArrayList<String> menuItems) {
