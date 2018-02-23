@@ -13,10 +13,8 @@ import net.miginfocom.swing.MigLayout;
 public class BankApplication extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-
 	static HashMap<Integer, BankAccount> table = new HashMap<>();
 	final static int TABLE_SIZE = 29;
-
 	private JMenuBar menuBar;
 	private JMenu navigateMenu, recordsMenu, transactionsMenu, fileMenu, exitMenu;
 	private JMenuItem closeApp;
@@ -143,7 +141,7 @@ public class BankApplication extends JFrame {
 			}
 		}
 
-				);
+	);
 
 
 		ActionListener first = new ActionListener() {
@@ -158,10 +156,7 @@ public class BankApplication extends JFrame {
 					saveOpenValues();
 
 					displayCurrentItem();
-
 				}
-
-
 			}
 		};
 
@@ -176,17 +171,11 @@ public class BankApplication extends JFrame {
 					JOptionPane.showMessageDialog(null, "No accounts in the system");
 				}
 				else {
-
-
 					while(i<TABLE_SIZE){
 						i++;
 						if(table.containsKey(i))
 							keyList.add(i);
 					}
-
-
-
-
 					int maxKey = Collections.max(keyList);
 
 					saveOpenValues();	
@@ -210,10 +199,8 @@ public class BankApplication extends JFrame {
 
 		ActionListener prev = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-
+				
 				ArrayList<Integer> keyList = new ArrayList<Integer>();
-
 
 				int i=0;
 
@@ -223,16 +210,12 @@ public class BankApplication extends JFrame {
 					JOptionPane.showMessageDialog(null, "No accounts selected");
 				}
 				else {
-
 					while(i<TABLE_SIZE){
 						i++;
 						if(table.containsKey(i))
 							keyList.add(i);
 					}
-
 					int minKey = Collections.min(keyList);
-
-
 					if(currentItem>minKey){
 						currentItem--;
 						while(!table.containsKey(currentItem)){
@@ -243,12 +226,10 @@ public class BankApplication extends JFrame {
 					displayDetails(currentItem);		
 				}
 			}
-
 		};
 
 		ActionListener last = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
 
 				if(table.size() ==0) {
 					JOptionPane.showMessageDialog(null, "No accounts in the system");
@@ -262,9 +243,7 @@ public class BankApplication extends JFrame {
 
 					while(!table.containsKey(currentItem)){
 						currentItem--;
-
 					}
-
 					displayDetails(currentItem);
 				}
 			}
@@ -294,8 +273,6 @@ public class BankApplication extends JFrame {
 
 					table.remove(currentItem);
 					JOptionPane.showMessageDialog(null, "Account Deleted");
-
-
 					displayCurrentItem();
 				}
 			}
@@ -316,7 +293,7 @@ public class BankApplication extends JFrame {
 				else if(table.get(currentItem)== null) {
 					JOptionPane.showMessageDialog(null, "No accounts selected");
 				}else {
-					//new way of editing surname and firstname
+					
 					fields.get("Surname").setEditable(true);
 					fields.get("First Name").setEditable(true);
 					openValues = true;
@@ -338,7 +315,6 @@ public class BankApplication extends JFrame {
 					if(interestRateStr!=null)
 						interestRate = Double.parseDouble(interestRateStr);
 				}
-
 			}
 		});
 
@@ -350,8 +326,6 @@ public class BankApplication extends JFrame {
 				}else {
 
 					JFrame frame = new JFrame("TableDemo");
-
-
 					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					String col[] = {"ID","Number","Name", "Account Type", "Balance", "Overdraft"};
 
@@ -379,7 +353,7 @@ public class BankApplication extends JFrame {
 
 		fileMenuItems.get("Open File").addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				//readFile();
+
 				fileHelper.readFile(table, fc);
 				displayCurrentItem();
 			}
@@ -392,7 +366,6 @@ public class BankApplication extends JFrame {
 				}else {
 					JOptionPane.showMessageDialog(null, "Nothing to save");
 				}
-
 			}
 		});
 
@@ -404,7 +377,6 @@ public class BankApplication extends JFrame {
 				}else {
 					JOptionPane.showMessageDialog(null, "Nothing to save");
 				}
-
 			}
 		});
 
@@ -434,7 +406,7 @@ public class BankApplication extends JFrame {
 
 						if(sName.equalsIgnoreCase((entry.getValue().getSurname().trim()))){
 							found = true;
-							//new way of displaying details using reusable method
+							
 							setTextEntry(entry);
 						}
 					}		
@@ -459,7 +431,6 @@ public class BankApplication extends JFrame {
 
 						if(accNum.equals(entry.getValue().getAccountNumber().trim())){
 							found = true;
-							//new way of displaying details using reusable method 
 							setTextEntry(entry);
 						}			 
 					}
@@ -501,11 +472,9 @@ public class BankApplication extends JFrame {
 					JOptionPane.showMessageDialog(null, "No Accounts to withdraw from.");
 				}else {
 
-
 					String accNum = JOptionPane.showInputDialog("Account number to withdraw from: ");
 
 					boolean found = false;
-
 
 					for (Map.Entry<Integer, BankAccount> entry : table.entrySet()) {
 
