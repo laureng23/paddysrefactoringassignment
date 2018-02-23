@@ -8,17 +8,17 @@ import javax.swing.*;
 import net.miginfocom.swing.MigLayout;
 
 public class CreateBankDialog extends JFrame {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	Random rand = new Random();
 
 	HashMap<Integer, BankAccount> table = new HashMap<Integer, BankAccount>();
-	
+
 	private JLabel accountNumberLabel, firstNameLabel, surnameLabel, accountTypeLabel, balanceLabel, overdraftLabel;
 	private JTextField accountNumberTextField;
 	private final JTextField firstNameTextField, surnameTextField, accountTypeTextField, balanceTextField, overdraftTextField;
-	
+
 	public void put(int key, BankAccount value){
 		int hash = (key%BankApplication.TABLE_SIZE);
 
@@ -27,21 +27,21 @@ public class CreateBankDialog extends JFrame {
 		}
 		table.put(hash, value);
 	}
-	
+
 	CreateBankDialog(HashMap<Integer, BankAccount> accounts) {
-		
+
 		super("Add Bank Details");
-		
+
 		table = accounts;
-		
+
 		setLayout(new BorderLayout());
-		
+
 		JPanel dataPanel = new JPanel(new MigLayout());
-		
+
 		String[] comboTypes = {"Current", "Deposit"};
-		
+
 		final JComboBox<String> comboBox = new JComboBox<String>(comboTypes);
-		
+
 		accountNumberLabel = new JLabel("Account Number: ");
 		accountNumberTextField = new JTextField(8);
 		accountNumberTextField.setEditable(true);
@@ -72,63 +72,63 @@ public class CreateBankDialog extends JFrame {
 		balanceTextField.setEditable(false);
 		dataPanel.add(balanceLabel, "growx, pushx");
 		dataPanel.add(balanceTextField, "growx, pushx, wrap");
-		
+
 		overdraftLabel = new JLabel("Overdraft: ");
 		overdraftTextField = new JTextField(10);
 		overdraftTextField.setText("0.0");
 		overdraftTextField.setEditable(false);
 		dataPanel.add(overdraftLabel, "growx, pushx");
 		dataPanel.add(overdraftTextField, "growx, pushx, wrap");
-		
+
 		add(dataPanel, BorderLayout.CENTER);
-		
+
 		JPanel buttonPanel = new JPanel(new FlowLayout());
 		JButton addButton = new JButton("Add");
 		JButton cancelButton = new JButton("Cancel");
 		buttonPanel.add(addButton);
 		buttonPanel.add(cancelButton);
-		
+
 		add(buttonPanel, BorderLayout.SOUTH);
-		
-		
+
+
 		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				String accountNumber = accountNumberTextField.getText();
 				String surname = surnameTextField.getText();
 				String firstName = firstNameTextField.getText();
-			
+
 				String accountType = comboBox.getSelectedItem().toString();
-				
-				
+
+
 				if (accountNumber != null && accountNumber.length()==8 && surname != null && firstName != null && accountType != null) {
 					try {
-						
+
 						boolean accNumTaken=false;
-						
+
 						int randNumber = rand.nextInt(24) + 1;
-						
-						 for (Map.Entry<Integer, BankAccount> entry : table.entrySet()) {
-							 
-							 while(randNumber == entry.getValue().getAccountID()){
-								
-								 randNumber = rand.nextInt(24)+1;
-							 }		 
-						 }
-						 
-							for (Map.Entry<Integer, BankAccount> entry : table.entrySet()) {					
-								 if(entry.getValue().getAccountNumber().trim().equals(accountNumberTextField.getText())){
-									 accNumTaken=true;	
-								 }
-							 }
+
+						for (Map.Entry<Integer, BankAccount> entry : table.entrySet()) {
+
+							while(randNumber == entry.getValue().getAccountID()){
+
+								randNumber = rand.nextInt(24)+1;
+							}		 
+						}
+
+						for (Map.Entry<Integer, BankAccount> entry : table.entrySet()) {					
+							if(entry.getValue().getAccountNumber().trim().equals(accountNumberTextField.getText())){
+								accNumTaken=true;	
+							}
+						}
 						if(!accNumTaken){
-						
+
 							BankAccount account = new BankAccount(randNumber, accountNumber, surname, firstName, accountType, 0.0, 0.0);
-						
+
 							int key = Integer.parseInt(account.getAccountNumber());
-							
+
 							int hash = (key%BankApplication.TABLE_SIZE);
-							
+
 							while(table.containsKey(hash)){
 								hash = hash+1;
 							}
@@ -146,13 +146,13 @@ public class CreateBankDialog extends JFrame {
 				dispose();
 			}
 		});
-		
+
 		cancelButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 			}
 		});
-		
+
 		setSize(400,800);
 		pack();
 		setVisible(true);

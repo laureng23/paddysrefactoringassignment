@@ -253,7 +253,7 @@ public class BankApplication extends JFrame {
 
 		ActionListener last = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 
 				if(table.size() ==0) {
 					JOptionPane.showMessageDialog(null, "No accounts in the system");
@@ -289,7 +289,7 @@ public class BankApplication extends JFrame {
 
 		recordMenuItems.get("Delete Item").addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				
+
 				if(table.size()==0) {
 					JOptionPane.showMessageDialog(null, "No accounts found");
 				}
@@ -297,17 +297,17 @@ public class BankApplication extends JFrame {
 					JOptionPane.showMessageDialog(null, "No accounts selected");
 				}else {
 
-				table.remove(currentItem);
-				JOptionPane.showMessageDialog(null, "Account Deleted");
+					table.remove(currentItem);
+					JOptionPane.showMessageDialog(null, "Account Deleted");
 
 
-				currentItem=0;
-				while(!table.containsKey(currentItem)){
-					currentItem++;
+					currentItem=0;
+					while(!table.containsKey(currentItem)){
+						currentItem++;
+					}
+					displayDetails(currentItem);
+
 				}
-				displayDetails(currentItem);
-
-			}
 			}
 		});
 
@@ -326,17 +326,17 @@ public class BankApplication extends JFrame {
 				else if(table.get(currentItem)== null) {
 					JOptionPane.showMessageDialog(null, "No accounts selected");
 				}else {
-				//new way of editing surname and firstname
-				fields.get("Surname").setEditable(true);
-				fields.get("First Name").setEditable(true);
-				openValues = true;
+					//new way of editing surname and firstname
+					fields.get("Surname").setEditable(true);
+					fields.get("First Name").setEditable(true);
+					openValues = true;
 				}
 			}
 		});
 
 		recordMenuItems.get("Set Interest").addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				
+
 				if(table.size()==0) {
 					JOptionPane.showMessageDialog(null, "No accounts found");
 				}
@@ -344,9 +344,9 @@ public class BankApplication extends JFrame {
 					JOptionPane.showMessageDialog(null, "No accounts selected");}
 				else {
 
-				String interestRateStr = JOptionPane.showInputDialog("Enter Interest Rate: (do not type the % sign)");
-				if(interestRateStr!=null)
-					interestRate = Double.parseDouble(interestRateStr);
+					String interestRateStr = JOptionPane.showInputDialog("Enter Interest Rate: (do not type the % sign)");
+					if(interestRateStr!=null)
+						interestRate = Double.parseDouble(interestRateStr);
 				}
 
 			}
@@ -401,13 +401,24 @@ public class BankApplication extends JFrame {
 
 		fileMenuItems.get("Save File").addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				fileHelper.writeFile(table, fc);
+				if(table != null && table.size()>0) {
+					fileHelper.writeFile(table, fc);
+				}else {
+					JOptionPane.showMessageDialog(null, "Nothing to save");
+				}
+
 			}
 		});
 
 		fileMenuItems.get("Save As").addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				fileHelper.saveFileAs(table,fc);
+
+				if(table != null && table.size()>0) {
+					fileHelper.saveFileAs(table,fc);
+				}else {
+					JOptionPane.showMessageDialog(null, "Nothing to save");
+				}
+
 			}
 		});
 
